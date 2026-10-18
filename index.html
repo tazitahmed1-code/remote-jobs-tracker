@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Remote Jobs Tracker</title>
+<style>
+body{font-family:sans-serif;margin:0;background:#f4f6f8}
+header{background:#1f4e79;color:#fff;padding:20px;text-align:center}
+input{width:90%;max-width:400px;padding:10px;margin:16px auto;display:block}
+.job{background:#fff;margin:10px;padding:14px;border-radius:8px}
+.tag{background:#e3edf7;padding:2px 8px;border-radius:4px;font-size:12px}
+a{color:#1f4e79}
+</style></head><body>
+<header><h1>Remote Jobs Tracker</h1><p>Python scraping + AI summaries</p></header>
+<input id="search" placeholder="Search jobs...">
+<div id="jobs"></div>
+<script>
+const jobs = [{"title": "Tech Lead Full-Stack Rails Engineer", "company": "Mitre Media", "tags": ["api", "CSS", "docker"], "url": "https://remotive.com/remote-jobs/software-development/tech-lead-full-stack-rails-engineer-2069746"}, {"title": "Remote Office Assistant", "company": "Coalition Technologies ", "tags": ["CSS", "excel", "frontend"], "url": "https://remotive.com/remote-jobs/marketing/remote-office-assistant-1680495"}, {"title": "Inside Sales Contractor", "company": "Credit Wellness, LLC", "tags": ["CRM", "google sheets", "financial services"], "url": "https://remotive.com/remote-jobs/sales/inside-sales-contractor-2086540"}, {"title": "Tier III Service Desk Engineer", "company": "Unio Digital", "tags": ["azure", "cisco", "security"], "url": "https://remotive.com/remote-jobs/information-technology/tier-iii-service-desk-engineer-2091045"}, {"title": "Freelance Writer", "company": "IAPWE", "tags": ["REST"], "url": "https://remotive.com/remote-jobs/writing/freelance-writer-1185979"}, {"title": "Freelance Copywriter", "company": "Coalition Technologies ", "tags": ["accounting", "excel", "research"], "url": "https://remotive.com/remote-jobs/writing/freelance-copywriter-1749306"}, {"title": "Senior React Full-stack Developer", "company": "Lemon.io", "tags": [".Net", "android", "AWS"], "url": "https://remotive.com/remote-jobs/software-development/senior-react-full-stack-developer-2091133"}, {"title": "Senior back-end Engineer", "company": "Lemon.io", "tags": [".Net", "android", "C"], "url": "https://remotive.com/remote-jobs/software-development/senior-back-end-engineer-2091132"}, {"title": "Content Reviewer - United States", "company": "TELUS Digital", "tags": ["android", "ios", "social media"], "url": "https://remotive.com/remote-jobs/all-others/content-reviewer-united-states-2091144"}, {"title": "Senior Shopify Developer", "company": "Sanctuary Computer Inc", "tags": ["admin", "api", "backend"], "url": "https://remotive.com/remote-jobs/software-development/senior-shopify-developer-2091140"}];
+const list = document.getElementById("jobs");
+function render(items) {
+  list.innerHTML = items.map(j => `
+    <div class="job">
+      <h3>${j.title}</h3>
+      <p>${j.company}</p>
+      ${j.tags.map(t => `<span class="tag">${t}</span>`).join(" ")}
+      <p><a href="${j.url}">View job</a></p>
+    </div>`).join("");
+}
+document.getElementById("search").addEventListener("input", e => {
+  const q = e.target.value.toLowerCase();
+  render(jobs.filter(j => JSON.stringify(j).toLowerCase().includes(q)));
+});
+render(jobs);
+</script></body></html>
